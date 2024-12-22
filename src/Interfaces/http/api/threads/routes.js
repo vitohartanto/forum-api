@@ -10,7 +10,7 @@ const routes = (handler) => [
   {
     method: 'GET',
     path: '/threads/{threadId}',
-    handler: (request, h) => handler.getThreadByIdHandler(request),
+    handler: (request) => handler.getThreadByIdHandler(request),
   },
 ];
 
