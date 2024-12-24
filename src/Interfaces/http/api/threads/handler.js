@@ -4,6 +4,9 @@ const AddThreadUseCase = require('../../../../Applications/use_case/AddThreadUse
 class ThreadsHandler {
   constructor(container) {
     this._container = container;
+
+    this.postThreadHandler = this.postThreadHandler.bind(this);
+    this.getThreadByIdHandler = this.getThreadByIdHandler.bind(this);
   }
 
   async postThreadHandler(request, h) {
