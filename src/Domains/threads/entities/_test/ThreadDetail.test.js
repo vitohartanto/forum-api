@@ -12,7 +12,7 @@ describe('ThreadDetail entities', () => {
 
     // Action & Assert
     expect(() => new ThreadDetail(payload)).toThrowError(
-      'THREAD_DETAIL.NOT_CONTAIN_NEEDED_PROPERTY'
+      'THREAD_DETAIL.NOT_CONTAIN_NEEDED_PROPERTY',
     );
   });
 
@@ -29,7 +29,7 @@ describe('ThreadDetail entities', () => {
 
     // Action & Assert
     expect(() => new ThreadDetail(payload)).toThrowError(
-      'THREAD_DETAIL.NOT_MEET_DATA_TYPE_SPECIFICATION'
+      'THREAD_DETAIL.NOT_MEET_DATA_TYPE_SPECIFICATION',
     );
   });
 
@@ -57,7 +57,7 @@ describe('ThreadDetail entities', () => {
         date: '2023-09-22T07:19:09.775Z',
         username: 'dicoding',
         comments: [],
-      })
+      }),
     );
   });
 });

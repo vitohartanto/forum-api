@@ -23,7 +23,7 @@ describe('ThreadRepositoryPostgres', () => {
 
       // Action & Assert
       await expect(
-        threadRepositoryPostgres.checkThreadAvailability('thread-123')
+        threadRepositoryPostgres.checkThreadAvailability('thread-123'),
       ).rejects.toThrowError(NotFoundError);
     });
 
@@ -38,7 +38,7 @@ describe('ThreadRepositoryPostgres', () => {
 
       // Action & Assert
       await expect(
-        threadRepositoryPostgres.checkThreadAvailability(threadId)
+        threadRepositoryPostgres.checkThreadAvailability(threadId),
       ).resolves.not.toThrowError(NotFoundError);
     });
   });
@@ -58,7 +58,7 @@ describe('ThreadRepositoryPostgres', () => {
       const fakeIdGenerator = () => '123';
       const threadRepositoryPostgres = new ThreadRepositoryPostgres(
         pool,
-        fakeIdGenerator
+        fakeIdGenerator,
       );
 
       // Action
@@ -66,7 +66,7 @@ describe('ThreadRepositoryPostgres', () => {
 
       // Assert
       const threads = await ThreadsTableTestHelper.findThreadsById(
-        'thread-123'
+        'thread-123',
       );
       expect(threads).toHaveLength(1);
     });
@@ -81,13 +81,13 @@ describe('ThreadRepositoryPostgres', () => {
       const fakeIdGenerator = () => '123';
       const threadRepositoryPostgres = new ThreadRepositoryPostgres(
         pool,
-        fakeIdGenerator
+        fakeIdGenerator,
       );
 
       // Action
       const addedThread = await threadRepositoryPostgres.addThread(
         'user-123',
-        newThread
+        newThread,
       );
 
       // Assert
@@ -96,7 +96,7 @@ describe('ThreadRepositoryPostgres', () => {
           id: 'thread-123',
           title: 'A thread',
           owner: 'user-123',
-        })
+        }),
       );
     });
   });
@@ -108,7 +108,7 @@ describe('ThreadRepositoryPostgres', () => {
 
       // Action & Assert
       await expect(
-        threadRepositoryPostgres.getThreadById('thread-123')
+        threadRepositoryPostgres.getThreadById('thread-123'),
       ).rejects.toThrowError(NotFoundError);
     });
 

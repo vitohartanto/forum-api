@@ -12,7 +12,7 @@ class RepliesHandler {
     const addedReply = await addReplyUseCase.execute(
       userId,
       request.params,
-      request.payload
+      request.payload,
     );
 
     const response = h.response({
@@ -28,7 +28,7 @@ class RepliesHandler {
   async deleteReplyByIdHandler(request) {
     const { id: userId } = request.auth.credentials;
     const deleteReplyUseCase = this._container.getInstance(
-      DeleteReplyUseCase.name
+      DeleteReplyUseCase.name,
     );
     await deleteReplyUseCase.execute(userId, request.params);
 

@@ -67,15 +67,9 @@ describe('GetThreadDetailUseCase', () => {
     const mockReplyRepository = new ReplyRepository();
 
     /** mocking needed function */
-    mockThreadRepository.getThreadById = jest.fn(() =>
-      Promise.resolve(mockThreadDetail)
-    );
-    mockCommentRepository.getCommentsByThreadId = jest.fn(() =>
-      Promise.resolve(mockComments)
-    );
-    mockReplyRepository.getRepliesByThreadId = jest.fn(() =>
-      Promise.resolve(mockReplies)
-    );
+    mockThreadRepository.getThreadById = jest.fn(() => Promise.resolve(mockThreadDetail));
+    mockCommentRepository.getCommentsByThreadId = jest.fn(() => Promise.resolve(mockComments));
+    mockReplyRepository.getRepliesByThreadId = jest.fn(() => Promise.resolve(mockReplies));
 
     /** creating use case instance */
     const getThreadDetailUseCase = new GetThreadDetailUseCase({
@@ -124,15 +118,15 @@ describe('GetThreadDetailUseCase', () => {
             replies: [],
           }),
         ],
-      })
+      }),
     );
     expect(mockThreadRepository.getThreadById).toBeCalledWith('thread-123');
     expect(mockCommentRepository.getCommentsByThreadId).toBeCalledWith(
-      'thread-123'
+      'thread-123',
     );
     expect(mockReplyRepository.getRepliesByThreadId).toBeCalledTimes(1);
     expect(mockReplyRepository.getRepliesByThreadId).toBeCalledWith(
-      'thread-123'
+      'thread-123',
     );
   });
 });

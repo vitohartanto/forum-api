@@ -152,7 +152,7 @@ describe('/threads/{threadId}/comments endpoint', () => {
       expect(response.statusCode).toEqual(400);
       expect(responseJson.status).toEqual('fail');
       expect(responseJson.message).toEqual(
-        'tidak dapat membuat komentar baru karena properti yang dibutuhkan tidak ada'
+        'tidak dapat membuat komentar baru karena properti yang dibutuhkan tidak ada',
       );
     });
 

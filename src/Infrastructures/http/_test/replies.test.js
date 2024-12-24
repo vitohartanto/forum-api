@@ -239,7 +239,7 @@ describe('/threads/{threadId}/replies endpoint', () => {
       expect(response.statusCode).toEqual(400);
       expect(responseJson.status).toEqual('fail');
       expect(responseJson.message).toEqual(
-        'tidak dapat membuat balasan baru karena properti yang dibutuhkan tidak ada'
+        'tidak dapat membuat balasan baru karena properti yang dibutuhkan tidak ada',
       );
     });
 

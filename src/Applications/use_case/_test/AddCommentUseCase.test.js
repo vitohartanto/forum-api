@@ -20,12 +20,8 @@ describe('AddCommentUseCase', () => {
     const mockCommentRepository = new CommentRepository();
 
     /** mocking needed function */
-    mockThreadRepository.checkThreadAvailability = jest.fn(() =>
-      Promise.resolve()
-    );
-    mockCommentRepository.addComment = jest.fn(() =>
-      Promise.resolve(mockAddedComment)
-    );
+    mockThreadRepository.checkThreadAvailability = jest.fn(() => Promise.resolve());
+    mockCommentRepository.addComment = jest.fn(() => Promise.resolve(mockAddedComment));
 
     /** creating use case instance */
     const addCommentUseCase = new AddCommentUseCase({
@@ -37,7 +33,7 @@ describe('AddCommentUseCase', () => {
     const addedComment = await addCommentUseCase.execute(
       'user-123',
       'thread-123',
-      useCasePayload
+      useCasePayload,
     );
 
     // Assert
@@ -46,16 +42,16 @@ describe('AddCommentUseCase', () => {
         id: 'comment-123',
         content: 'A comment',
         owner: 'user-123',
-      })
+      }),
     );
 
     expect(mockThreadRepository.checkThreadAvailability).toBeCalledWith(
-      'thread-123'
+      'thread-123',
     );
     expect(mockCommentRepository.addComment).toBeCalledWith(
       'user-123',
       'thread-123',
-      new NewComment({ content: useCasePayload.content })
+      new NewComment({ content: useCasePayload.content }),
     );
   });
 });

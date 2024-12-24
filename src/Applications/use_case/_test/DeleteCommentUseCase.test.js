@@ -15,12 +15,8 @@ describe('DeleteCommentUseCase', () => {
     const mockCommentRepository = new CommentRepository();
 
     /** mocking needed function */
-    mockThreadRepository.checkThreadAvailability = jest.fn(() =>
-      Promise.resolve()
-    );
-    mockCommentRepository.checkCommentAvailability = jest.fn(() =>
-      Promise.resolve()
-    );
+    mockThreadRepository.checkThreadAvailability = jest.fn(() => Promise.resolve());
+    mockCommentRepository.checkCommentAvailability = jest.fn(() => Promise.resolve());
     mockCommentRepository.verifyCommentOwner = jest.fn(() => Promise.resolve());
     mockCommentRepository.deleteCommentById = jest.fn(() => Promise.resolve());
 
@@ -35,18 +31,18 @@ describe('DeleteCommentUseCase', () => {
 
     // Assert
     expect(mockThreadRepository.checkThreadAvailability).toHaveBeenCalledWith(
-      useCaseParams.threadId
+      useCaseParams.threadId,
     );
     expect(mockCommentRepository.checkCommentAvailability).toHaveBeenCalledWith(
       useCaseParams.commentId,
-      useCaseParams.threadId
+      useCaseParams.threadId,
     );
     expect(mockCommentRepository.verifyCommentOwner).toHaveBeenCalledWith(
       useCaseParams.commentId,
-      'user-123'
+      'user-123',
     );
     expect(mockCommentRepository.deleteCommentById).toHaveBeenCalledWith(
-      useCaseParams.commentId
+      useCaseParams.commentId,
     );
   });
 });

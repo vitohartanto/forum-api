@@ -28,8 +28,8 @@ describe('CommentRepositoryPostgres', () => {
       await expect(
         commentRepositoryPostgres.checkCommentAvailability(
           'comment-123',
-          'thread-123'
-        )
+          'thread-123',
+        ),
       ).rejects.toThrowError(new NotFoundError('komentar tidak ditemukan'));
     });
 
@@ -52,7 +52,7 @@ describe('CommentRepositoryPostgres', () => {
 
       // Action & Assert
       await expect(
-        commentRepositoryPostgres.checkCommentAvailability(commentId, threadId)
+        commentRepositoryPostgres.checkCommentAvailability(commentId, threadId),
       ).rejects.toThrowError(new NotFoundError('komentar tidak valid'));
     });
 
@@ -76,10 +76,10 @@ describe('CommentRepositoryPostgres', () => {
       await expect(
         commentRepositoryPostgres.checkCommentAvailability(
           'comment-123',
-          'other-thread'
-        )
+          'other-thread',
+        ),
       ).rejects.toThrowError(
-        new NotFoundError('komentar dalam thread tidak ditemukan')
+        new NotFoundError('komentar dalam thread tidak ditemukan'),
       );
     });
 
@@ -101,7 +101,7 @@ describe('CommentRepositoryPostgres', () => {
 
       // Action & Assert
       await expect(
-        commentRepositoryPostgres.checkCommentAvailability(commentId, threadId)
+        commentRepositoryPostgres.checkCommentAvailability(commentId, threadId),
       ).resolves.not.toThrowError(NotFoundError);
     });
   });
@@ -125,7 +125,7 @@ describe('CommentRepositoryPostgres', () => {
 
       // Action & Assert
       await expect(
-        commentRepositoryPostgres.verifyCommentOwner(commentId, 'user-other')
+        commentRepositoryPostgres.verifyCommentOwner(commentId, 'user-other'),
       ).rejects.toThrowError(AuthorizationError);
     });
 
@@ -147,7 +147,7 @@ describe('CommentRepositoryPostgres', () => {
 
       // Action & Assert
       await expect(
-        commentRepositoryPostgres.verifyCommentOwner(commentId, userId)
+        commentRepositoryPostgres.verifyCommentOwner(commentId, userId),
       ).resolves.not.toThrowError(AuthorizationError);
     });
   });
@@ -168,19 +168,19 @@ describe('CommentRepositoryPostgres', () => {
       const fakeIdGenerator = () => '123';
       const commentRepositoryPostgres = new CommentRepositoryPostgres(
         pool,
-        fakeIdGenerator
+        fakeIdGenerator,
       );
 
       // Action
       await commentRepositoryPostgres.addComment(
         'user-123',
         'thread-123',
-        newComment
+        newComment,
       );
 
       // Assert
       const comments = await CommentsTableTestHelper.findCommentsById(
-        'comment-123'
+        'comment-123',
       );
       expect(comments).toHaveLength(1);
     });
@@ -192,14 +192,14 @@ describe('CommentRepositoryPostgres', () => {
       const fakeIdGenerator = () => '123';
       const commentRepositoryPostgres = new CommentRepositoryPostgres(
         pool,
-        fakeIdGenerator
+        fakeIdGenerator,
       );
 
       // Action
       const addedComment = await commentRepositoryPostgres.addComment(
         'user-123',
         'thread-123',
-        newComment
+        newComment,
       );
 
       // Assert
@@ -208,7 +208,7 @@ describe('CommentRepositoryPostgres', () => {
           id: 'comment-123',
           content: 'A comment',
           owner: 'user-123',
-        })
+        }),
       );
     });
   });
@@ -246,7 +246,7 @@ describe('CommentRepositoryPostgres', () => {
 
       // Action
       const comments = await commentRepositoryPostgres.getCommentsByThreadId(
-        threadId
+        threadId,
       );
 
       // Assert
@@ -285,7 +285,7 @@ describe('CommentRepositoryPostgres', () => {
 
       // Assert
       const comments = await CommentsTableTestHelper.findCommentsById(
-        commentId
+        commentId,
       );
       expect(comments).toHaveLength(1);
       expect(comments[0].is_delete).toBeTruthy();

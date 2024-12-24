@@ -26,15 +26,9 @@ describe('AddReplyUseCase', () => {
     const mockReplyRepository = new ReplyRepository();
 
     /** mocking needed function */
-    mockThreadRepository.checkThreadAvailability = jest.fn(() =>
-      Promise.resolve()
-    );
-    mockCommentRepository.checkCommentAvailability = jest.fn(() =>
-      Promise.resolve()
-    );
-    mockReplyRepository.addReply = jest.fn(() =>
-      Promise.resolve(mockAddedReply)
-    );
+    mockThreadRepository.checkThreadAvailability = jest.fn(() => Promise.resolve());
+    mockCommentRepository.checkCommentAvailability = jest.fn(() => Promise.resolve());
+    mockReplyRepository.addReply = jest.fn(() => Promise.resolve(mockAddedReply));
 
     /** creating use case instance */
     const addReplyUseCase = new AddReplyUseCase({
@@ -47,7 +41,7 @@ describe('AddReplyUseCase', () => {
     const addedReply = await addReplyUseCase.execute(
       'user-123',
       useCaseParams,
-      useCasePayload
+      useCasePayload,
     );
 
     // Assert
@@ -56,20 +50,20 @@ describe('AddReplyUseCase', () => {
         id: 'reply-123',
         content: 'A reply',
         owner: 'user-123',
-      })
+      }),
     );
 
     expect(mockThreadRepository.checkThreadAvailability).toBeCalledWith(
-      useCaseParams.threadId
+      useCaseParams.threadId,
     );
     expect(mockCommentRepository.checkCommentAvailability).toBeCalledWith(
       useCaseParams.commentId,
-      useCaseParams.threadId
+      useCaseParams.threadId,
     );
     expect(mockReplyRepository.addReply).toBeCalledWith(
       'user-123',
       useCaseParams.commentId,
-      new NewReply({ content: useCasePayload.content })
+      new NewReply({ content: useCasePayload.content }),
     );
   });
 });

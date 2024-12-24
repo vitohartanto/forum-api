@@ -21,9 +21,7 @@ describe('AddThreadUseCase', () => {
     const mockThreadRepository = new ThreadRepository();
 
     /** mocking needed function */
-    mockThreadRepository.addThread = jest.fn(() =>
-      Promise.resolve(mockAddedThread)
-    );
+    mockThreadRepository.addThread = jest.fn(() => Promise.resolve(mockAddedThread));
 
     /** creating use case instance */
     const addThreadUseCase = new AddThreadUseCase({
@@ -33,7 +31,7 @@ describe('AddThreadUseCase', () => {
     // Action
     const addedThread = await addThreadUseCase.execute(
       'user-123',
-      useCasePayload
+      useCasePayload,
     );
 
     // Assert
@@ -42,7 +40,7 @@ describe('AddThreadUseCase', () => {
         id: 'thread-123',
         title: 'A thread',
         owner: 'user-123',
-      })
+      }),
     );
 
     expect(mockThreadRepository.addThread).toBeCalledWith(
@@ -50,7 +48,7 @@ describe('AddThreadUseCase', () => {
       new NewThread({
         title: useCasePayload.title,
         body: useCasePayload.body,
-      })
+      }),
     );
   });
 });
