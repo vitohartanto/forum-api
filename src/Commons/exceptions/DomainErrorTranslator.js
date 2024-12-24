@@ -52,11 +52,5 @@ DomainErrorTranslator._directories = {
   'NEW_REPLY.NOT_MEET_DATA_TYPE_SPECIFICATION': new InvariantError(
     'balasan harus berupa string'
   ),
-  'LIKE.NOT_CONTAIN_NEEDED_PROPERTY': new InvariantError(
-    'tidak dapat menyukai komentar karena properti yang dibutuhkan tidak ada'
-  ),
-  'LIKE.NOT_MEET_DATA_TYPE_SPECIFICATION': new InvariantError(
-    'tidak dapat menyukai komentar karena tipe data tidak sesuai'
-  ),
 };
 module.exports = DomainErrorTranslator;

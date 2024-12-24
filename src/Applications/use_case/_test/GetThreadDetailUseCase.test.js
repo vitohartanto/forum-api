@@ -3,7 +3,6 @@ const ThreadDetail = require('../../../Domains/threads/entities/ThreadDetail');
 const ThreadRepository = require('../../../Domains/threads/ThreadRepository');
 const CommentRepository = require('../../../Domains/comments/CommentRepository');
 const ReplyRepository = require('../../../Domains/replies/ReplyRepository');
-const CommentLikeRepository = require('../../../Domains/likes/CommentLikeRepository');
 const CommentDetail = require('../../../Domains/comments/entities/CommentDetail');
 const ReplyDetail = require('../../../Domains/replies/entities/ReplyDetail');
 
@@ -62,39 +61,10 @@ describe('GetThreadDetailUseCase', () => {
       },
     ];
 
-    const mockCommentsLikes = [
-      {
-        id: 'like-1',
-        comment: 'comment-1',
-        owner: 'johndoe',
-      },
-      {
-        id: 'like-2',
-        comment: 'comment-1',
-        owner: 'foobar',
-      },
-      {
-        id: 'like-3',
-        comment: 'comment-2',
-        owner: 'johndoe',
-      },
-      {
-        id: 'like-4',
-        comment: 'comment-2',
-        owner: 'johndoe',
-      },
-      {
-        id: 'like-5',
-        comment: 'comment-2',
-        owner: 'johndoe',
-      },
-    ];
-
     /** creating dependency of use case */
     const mockThreadRepository = new ThreadRepository();
     const mockCommentRepository = new CommentRepository();
     const mockReplyRepository = new ReplyRepository();
-    const mockCommentLikeRepository = new CommentLikeRepository();
 
     /** mocking needed function */
     mockThreadRepository.getThreadById = jest.fn(() =>
@@ -106,16 +76,12 @@ describe('GetThreadDetailUseCase', () => {
     mockReplyRepository.getRepliesByThreadId = jest.fn(() =>
       Promise.resolve(mockReplies)
     );
-    mockCommentLikeRepository.getLikesByThreadId = jest.fn(() =>
-      Promise.resolve(mockCommentsLikes)
-    );
 
     /** creating use case instance */
     const getThreadDetailUseCase = new GetThreadDetailUseCase({
       threadRepository: mockThreadRepository,
       commentRepository: mockCommentRepository,
       replyRepository: mockReplyRepository,
-      commentLikeRepository: mockCommentLikeRepository,
     });
 
     // Action
@@ -149,7 +115,6 @@ describe('GetThreadDetailUseCase', () => {
                 content: '**balasan telah dihapus**',
               }),
             ],
-            likeCount: 2,
           }),
           new CommentDetail({
             id: 'comment-2',
@@ -157,7 +122,6 @@ describe('GetThreadDetailUseCase', () => {
             date: '2023-09-08T00:00:00.000Z',
             content: '**komentar telah dihapus**',
             replies: [],
-            likeCount: 3,
           }),
         ],
       })
@@ -168,10 +132,6 @@ describe('GetThreadDetailUseCase', () => {
     );
     expect(mockReplyRepository.getRepliesByThreadId).toBeCalledTimes(1);
     expect(mockReplyRepository.getRepliesByThreadId).toBeCalledWith(
-      'thread-123'
-    );
-    expect(mockCommentLikeRepository.getLikesByThreadId).toBeCalledTimes(1);
-    expect(mockCommentLikeRepository.getLikesByThreadId).toBeCalledWith(
       'thread-123'
     );
   });
