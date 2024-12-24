@@ -87,7 +87,7 @@ describe('/threads/{threadId}/comments endpoint', () => {
       const responseJson = JSON.parse(response.payload);
       expect(response.statusCode).toEqual(404);
       expect(responseJson.status).toEqual('fail');
-      expect(responseJson.message).toEqual('thread tidak ditemukan');
+      expect(responseJson.message).toEqual('Thread not found');
     });
 
     it('should response 400 when body request not contain needed property', async () => {
@@ -152,7 +152,7 @@ describe('/threads/{threadId}/comments endpoint', () => {
       expect(response.statusCode).toEqual(400);
       expect(responseJson.status).toEqual('fail');
       expect(responseJson.message).toEqual(
-        'tidak dapat membuat comment baru karena properti yang dibutuhkan tidak ada'
+        'tidak dapat membuat komentar baru karena properti yang dibutuhkan tidak ada'
       );
     });
 
@@ -219,9 +219,7 @@ describe('/threads/{threadId}/comments endpoint', () => {
       const responseJson = JSON.parse(response.payload);
       expect(response.statusCode).toEqual(400);
       expect(responseJson.status).toEqual('fail');
-      expect(responseJson.message).toEqual(
-        'tidak dapat membuat comment baru karena tipe data tidak sesuai'
-      );
+      expect(responseJson.message).toEqual('komentar harus berupa string');
     });
 
     it('should response 201 and persisted comment', async () => {
@@ -360,7 +358,7 @@ describe('/threads/{threadId}/comments endpoint', () => {
       const responseJson = JSON.parse(response.payload);
       expect(response.statusCode).toEqual(404);
       expect(responseJson.status).toEqual('fail');
-      expect(responseJson.message).toEqual('thread tidak ditemukan');
+      expect(responseJson.message).toEqual('Thread not found');
     });
 
     it('should response 404 when comments does not exist', async () => {
@@ -422,7 +420,7 @@ describe('/threads/{threadId}/comments endpoint', () => {
       const responseJson = JSON.parse(response.payload);
       expect(response.statusCode).toEqual(404);
       expect(responseJson.status).toEqual('fail');
-      expect(responseJson.message).toEqual('comment tidak ditemukan');
+      expect(responseJson.message).toEqual('komentar tidak ditemukan');
     });
 
     it('should response 403 when current user is not the owner of the comment', async () => {
@@ -525,7 +523,7 @@ describe('/threads/{threadId}/comments endpoint', () => {
       const responseJson = JSON.parse(response.payload);
       expect(response.statusCode).toEqual(403);
       expect(responseJson.status).toEqual('fail');
-      expect(responseJson.message).toEqual('tidak sah');
+      expect(responseJson.message).toEqual('akses dilarang');
     });
 
     it('should response 201 and delete comment', async () => {
