@@ -6,14 +6,14 @@ describe('ThreadRepository interface', () => {
     const threadRepository = new ThreadRepository();
 
     // Action and Assert
-    await expect(threadRepository.addThread({})).rejects.toThrowError(
+    await expect(threadRepository.addThread({})).rejects.toThrow(
       'THREAD_REPOSITORY.METHOD_NOT_IMPLEMENTED',
     );
-    await expect(threadRepository.getThreadById('')).rejects.toThrowError(
+    await expect(threadRepository.getThreadById('')).rejects.toThrow(
       'THREAD_REPOSITORY.METHOD_NOT_IMPLEMENTED',
     );
     await expect(
       threadRepository.checkThreadAvailability(''),
-    ).rejects.toThrowError('THREAD_REPOSITORY.METHOD_NOT_IMPLEMENTED');
+    ).rejects.toThrow('THREAD_REPOSITORY.METHOD_NOT_IMPLEMENTED');
   });
 });

@@ -120,12 +120,12 @@ describe('GetThreadDetailUseCase', () => {
         ],
       }),
     );
-    expect(mockThreadRepository.getThreadById).toBeCalledWith('thread-123');
-    expect(mockCommentRepository.getCommentsByThreadId).toBeCalledWith(
+    expect(mockThreadRepository.getThreadById).toHaveBeenCalledWith('thread-123');
+    expect(mockCommentRepository.getCommentsByThreadId).toHaveBeenCalledWith(
       'thread-123',
     );
-    expect(mockReplyRepository.getRepliesByThreadId).toBeCalledTimes(1);
-    expect(mockReplyRepository.getRepliesByThreadId).toBeCalledWith(
+    expect(mockReplyRepository.getRepliesByThreadId).toHaveBeenCalledTimes(1);
+    expect(mockReplyRepository.getRepliesByThreadId).toHaveBeenCalledWith(
       'thread-123',
     );
   });

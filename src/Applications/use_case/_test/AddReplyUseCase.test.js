@@ -53,14 +53,14 @@ describe('AddReplyUseCase', () => {
       }),
     );
 
-    expect(mockThreadRepository.checkThreadAvailability).toBeCalledWith(
+    expect(mockThreadRepository.checkThreadAvailability).toHaveBeenCalledWith(
       useCaseParams.threadId,
     );
-    expect(mockCommentRepository.checkCommentAvailability).toBeCalledWith(
+    expect(mockCommentRepository.checkCommentAvailability).toHaveBeenCalledWith(
       useCaseParams.commentId,
       useCaseParams.threadId,
     );
-    expect(mockReplyRepository.addReply).toBeCalledWith(
+    expect(mockReplyRepository.addReply).toHaveBeenCalledWith(
       'user-123',
       useCaseParams.commentId,
       new NewReply({ content: useCasePayload.content }),

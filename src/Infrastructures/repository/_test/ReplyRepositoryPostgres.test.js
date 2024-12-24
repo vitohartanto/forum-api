@@ -29,7 +29,7 @@ describe('ReplyRepositoryPostgres', () => {
       // Action & Assert
       await expect(
         replyRepositoryPostgres.checkReplyAvailability('reply-123'),
-      ).rejects.toThrowError(new NotFoundError('balasan tidak ditemukan'));
+      ).rejects.toThrow(new NotFoundError('balasan tidak ditemukan'));
     });
 
     it('should throw NotFoundError when reply is deleted', async () => {
@@ -58,7 +58,7 @@ describe('ReplyRepositoryPostgres', () => {
       // Action & Assert
       await expect(
         replyRepositoryPostgres.checkReplyAvailability('reply-123', commentId),
-      ).rejects.toThrowError(new NotFoundError('balasan tidak valid'));
+      ).rejects.toThrow(new NotFoundError('balasan tidak valid'));
     });
 
     it('should throw NotFoundError when reply is npt found in comment', async () => {
@@ -89,7 +89,7 @@ describe('ReplyRepositoryPostgres', () => {
           'reply-123',
           'other-comment',
         ),
-      ).rejects.toThrowError(
+      ).rejects.toThrow(
         new NotFoundError('balasan dalam komentar tidak ditemukan'),
       );
     });
@@ -119,7 +119,7 @@ describe('ReplyRepositoryPostgres', () => {
       // Action & Assert
       await expect(
         replyRepositoryPostgres.checkReplyAvailability(replyId, commentId),
-      ).resolves.not.toThrowError(NotFoundError);
+      ).resolves.not.toThrow(NotFoundError);
     });
   });
 
@@ -149,7 +149,7 @@ describe('ReplyRepositoryPostgres', () => {
       // Action & Assert
       await expect(
         replyRepositoryPostgres.verifyReplyOwner(replyId, 'user-other'),
-      ).rejects.toThrowError(AuthorizationError);
+      ).rejects.toThrow(AuthorizationError);
     });
 
     it('should not throw AuthorizationError when reply owner authorized', async () => {
@@ -177,7 +177,7 @@ describe('ReplyRepositoryPostgres', () => {
       // Action & Assert
       await expect(
         replyRepositoryPostgres.verifyReplyOwner(replyId, userId),
-      ).resolves.not.toThrowError(AuthorizationError);
+      ).resolves.not.toThrow(AuthorizationError);
     });
   });
 

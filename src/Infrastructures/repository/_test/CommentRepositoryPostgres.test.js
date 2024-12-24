@@ -30,7 +30,7 @@ describe('CommentRepositoryPostgres', () => {
           'comment-123',
           'thread-123',
         ),
-      ).rejects.toThrowError(new NotFoundError('komentar tidak ditemukan'));
+      ).rejects.toThrow(new NotFoundError('komentar tidak ditemukan'));
     });
 
     it('should throw NotFoundError when comment is deleted', async () => {
@@ -53,7 +53,7 @@ describe('CommentRepositoryPostgres', () => {
       // Action & Assert
       await expect(
         commentRepositoryPostgres.checkCommentAvailability(commentId, threadId),
-      ).rejects.toThrowError(new NotFoundError('komentar tidak valid'));
+      ).rejects.toThrow(new NotFoundError('komentar tidak valid'));
     });
 
     it('should throw NotFoundError when comment is not found in thread', async () => {
@@ -78,7 +78,7 @@ describe('CommentRepositoryPostgres', () => {
           'comment-123',
           'other-thread',
         ),
-      ).rejects.toThrowError(
+      ).rejects.toThrow(
         new NotFoundError('komentar dalam thread tidak ditemukan'),
       );
     });
@@ -102,7 +102,7 @@ describe('CommentRepositoryPostgres', () => {
       // Action & Assert
       await expect(
         commentRepositoryPostgres.checkCommentAvailability(commentId, threadId),
-      ).resolves.not.toThrowError(NotFoundError);
+      ).resolves.not.toThrow(NotFoundError);
     });
   });
 
@@ -126,7 +126,7 @@ describe('CommentRepositoryPostgres', () => {
       // Action & Assert
       await expect(
         commentRepositoryPostgres.verifyCommentOwner(commentId, 'user-other'),
-      ).rejects.toThrowError(AuthorizationError);
+      ).rejects.toThrow(AuthorizationError);
     });
 
     it('should not throw AuthorizationError when comment owner authorized', async () => {
@@ -148,7 +148,7 @@ describe('CommentRepositoryPostgres', () => {
       // Action & Assert
       await expect(
         commentRepositoryPostgres.verifyCommentOwner(commentId, userId),
-      ).resolves.not.toThrowError(AuthorizationError);
+      ).resolves.not.toThrow(AuthorizationError);
     });
   });
 

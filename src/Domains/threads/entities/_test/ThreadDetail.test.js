@@ -11,7 +11,7 @@ describe('ThreadDetail entities', () => {
     };
 
     // Action & Assert
-    expect(() => new ThreadDetail(payload)).toThrowError(
+    expect(() => new ThreadDetail(payload)).toThrow(
       'THREAD_DETAIL.NOT_CONTAIN_NEEDED_PROPERTY',
     );
   });
@@ -28,7 +28,7 @@ describe('ThreadDetail entities', () => {
     };
 
     // Action & Assert
-    expect(() => new ThreadDetail(payload)).toThrowError(
+    expect(() => new ThreadDetail(payload)).toThrow(
       'THREAD_DETAIL.NOT_MEET_DATA_TYPE_SPECIFICATION',
     );
   });

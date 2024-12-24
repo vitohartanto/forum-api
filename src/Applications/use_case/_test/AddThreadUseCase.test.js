@@ -43,7 +43,7 @@ describe('AddThreadUseCase', () => {
       }),
     );
 
-    expect(mockThreadRepository.addThread).toBeCalledWith(
+    expect(mockThreadRepository.addThread).toHaveBeenCalledWith(
       'user-123',
       new NewThread({
         title: useCasePayload.title,

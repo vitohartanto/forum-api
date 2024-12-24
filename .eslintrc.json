@@ -1,16 +1,26 @@
 {
     "env": {
+        "jest": true,
         "browser": true,
         "commonjs": true,
         "es2021": true,
         "node": true
     },
     "extends": [
-        "airbnb-base"
+        "airbnb-base",
+        "plugin:jest/recommended"  // Add Jest recommended rules
+    ],
+    "plugins": [
+        "jest"  // Add the Jest plugin
     ],
     "parserOptions": {
         "ecmaVersion": 12
     },
     "rules": {
-    }
+    "no-underscore-dangle": "off",
+    "class-methods-use-this": "off",
+    "no-unused-vars": "off",
+    "camelcase": "off",
+    "max-len": ["error", { "code": 220 }]
+  }
 }

@@ -6,22 +6,22 @@ describe('ReplyRepository interface', () => {
     const replyRepository = new ReplyRepository();
 
     // Action and Assert
-    await expect(replyRepository.addReply({})).rejects.toThrowError(
+    await expect(replyRepository.addReply({})).rejects.toThrow(
       'REPLY_REPOSITORY.METHOD_NOT_IMPLEMENTED',
     );
     await expect(
       replyRepository.getRepliesByCommentId(''),
-    ).rejects.toThrowError('REPLY_REPOSITORY.METHOD_NOT_IMPLEMENTED');
-    await expect(replyRepository.getRepliesByThreadId('')).rejects.toThrowError(
+    ).rejects.toThrow('REPLY_REPOSITORY.METHOD_NOT_IMPLEMENTED');
+    await expect(replyRepository.getRepliesByThreadId('')).rejects.toThrow(
       'REPLY_REPOSITORY.METHOD_NOT_IMPLEMENTED',
     );
-    await expect(replyRepository.deleteReplyById('')).rejects.toThrowError(
+    await expect(replyRepository.deleteReplyById('')).rejects.toThrow(
       'REPLY_REPOSITORY.METHOD_NOT_IMPLEMENTED',
     );
     await expect(
       replyRepository.checkReplyAvailability('', ''),
-    ).rejects.toThrowError('REPLY_REPOSITORY.METHOD_NOT_IMPLEMENTED');
-    await expect(replyRepository.verifyReplyOwner('', '')).rejects.toThrowError(
+    ).rejects.toThrow('REPLY_REPOSITORY.METHOD_NOT_IMPLEMENTED');
+    await expect(replyRepository.verifyReplyOwner('', '')).rejects.toThrow(
       'REPLY_REPOSITORY.METHOD_NOT_IMPLEMENTED',
     );
   });

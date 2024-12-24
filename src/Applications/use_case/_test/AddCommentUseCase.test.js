@@ -45,10 +45,10 @@ describe('AddCommentUseCase', () => {
       }),
     );
 
-    expect(mockThreadRepository.checkThreadAvailability).toBeCalledWith(
+    expect(mockThreadRepository.checkThreadAvailability).toHaveBeenCalledWith(
       'thread-123',
     );
-    expect(mockCommentRepository.addComment).toBeCalledWith(
+    expect(mockCommentRepository.addComment).toHaveBeenCalledWith(
       'user-123',
       'thread-123',
       new NewComment({ content: useCasePayload.content }),
