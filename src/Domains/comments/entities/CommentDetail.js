@@ -14,7 +14,7 @@ class CommentDetail {
   _verifyPayload(payload) {
     const { id, username, content, date, replies, is_delete } = payload;
 
-    if (!id || !username || !content || !date || is_delete === undefined) {
+    if (!id || !username || !content || !date) {
       throw new Error('COMMENT_DETAIL.NOT_CONTAIN_NEEDED_PROPERTY');
     }
 
@@ -23,8 +23,7 @@ class CommentDetail {
       typeof username !== 'string' ||
       typeof content !== 'string' ||
       (typeof date !== 'string' && typeof date !== 'object') ||
-      !Array.isArray(replies) ||
-      typeof is_delete !== 'boolean'
+      !Array.isArray(replies)
     ) {
       throw new Error('COMMENT_DETAIL.NOT_MEET_DATA_TYPE_SPECIFICATION');
     }
