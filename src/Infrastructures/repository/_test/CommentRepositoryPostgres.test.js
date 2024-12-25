@@ -259,7 +259,8 @@ describe('CommentRepositoryPostgres', () => {
       expect(comments[1].content).toBe('A new comment');
       expect(comments[0].date).toBeTruthy();
       expect(comments[1].date).toBeTruthy();
-      expect(comments[0].is_delete).toBeFalsy();
+      expect(comments[0].is_delete).toStrictEqual(false);
+      expect(comments[1].is_delete).toStrictEqual(false);
     });
   });
 
