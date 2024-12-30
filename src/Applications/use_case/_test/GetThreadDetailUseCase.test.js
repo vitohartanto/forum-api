@@ -42,7 +42,7 @@ describe('GetThreadDetailUseCase', () => {
         content: 'a reply',
         comment: 'comment-1',
         is_delete: false,
-        owner: 'johndoe', // Assuming 'owner' is part of the reply object
+        owner: 'johndoe',
       },
       {
         id: 'reply-2',
@@ -51,7 +51,7 @@ describe('GetThreadDetailUseCase', () => {
         content: 'a deleted reply',
         comment: 'comment-1',
         is_delete: true,
-        owner: 'foobar', // Assuming 'owner' is part of the reply object
+        owner: 'foobar',
       },
       {
         id: 'reply-3',
@@ -60,7 +60,7 @@ describe('GetThreadDetailUseCase', () => {
         content: 'a reply',
         comment: 'comment-2',
         is_delete: false,
-        owner: 'foobar', // Assuming 'owner' is part of the reply object
+        owner: 'foobar',
       },
     ];
 
@@ -87,7 +87,19 @@ describe('GetThreadDetailUseCase', () => {
     );
 
     mockReplyRepository.getRepliesByThreadId = jest.fn(() =>
-      Promise.resolve(mockReplies)
+      Promise.resolve(
+        mockReplies.map((reply) => ({
+          id: reply.id,
+          content: reply.is_delete
+            ? '**balasan telah dihapus**'
+            : reply.content,
+          date: reply.date,
+          comment: reply.comment,
+          is_delete: reply.is_delete,
+          username: reply.username,
+          owner: reply.owner,
+        }))
+      )
     );
 
     /** creating use case instance */
