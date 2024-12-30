@@ -42,6 +42,7 @@ describe('GetThreadDetailUseCase', () => {
         content: 'a reply',
         comment: 'comment-1',
         is_delete: false,
+        owner: 'johndoe', // Assuming 'owner' is part of the reply object
       },
       {
         id: 'reply-2',
@@ -50,6 +51,7 @@ describe('GetThreadDetailUseCase', () => {
         content: 'a deleted reply',
         comment: 'comment-1',
         is_delete: true,
+        owner: 'foobar', // Assuming 'owner' is part of the reply object
       },
       {
         id: 'reply-3',
@@ -58,6 +60,7 @@ describe('GetThreadDetailUseCase', () => {
         content: 'a reply',
         comment: 'comment-2',
         is_delete: false,
+        owner: 'foobar', // Assuming 'owner' is part of the reply object
       },
     ];
 
@@ -67,9 +70,25 @@ describe('GetThreadDetailUseCase', () => {
     const mockReplyRepository = new ReplyRepository();
 
     /** mocking needed function */
-    mockThreadRepository.getThreadById = jest.fn(() => Promise.resolve(mockThreadDetail));
-    mockCommentRepository.getCommentsByThreadId = jest.fn(() => Promise.resolve(mockComments));
-    mockReplyRepository.getRepliesByThreadId = jest.fn(() => Promise.resolve(mockReplies));
+    mockThreadRepository.getThreadById = jest.fn(() =>
+      Promise.resolve({
+        ...mockThreadDetail,
+        // Simulating additional data returned by getThreadById if needed
+      })
+    );
+
+    mockCommentRepository.getCommentsByThreadId = jest.fn(() =>
+      Promise.resolve(
+        mockComments.map((comment) => ({
+          ...comment,
+          // Simulating additional data for comments if needed
+        }))
+      )
+    );
+
+    mockReplyRepository.getRepliesByThreadId = jest.fn(() =>
+      Promise.resolve(mockReplies)
+    );
 
     /** creating use case instance */
     const getThreadDetailUseCase = new GetThreadDetailUseCase({
@@ -118,15 +137,17 @@ describe('GetThreadDetailUseCase', () => {
             replies: [],
           }),
         ],
-      }),
+      })
     );
-    expect(mockThreadRepository.getThreadById).toHaveBeenCalledWith('thread-123');
+    expect(mockThreadRepository.getThreadById).toHaveBeenCalledWith(
+      'thread-123'
+    );
     expect(mockCommentRepository.getCommentsByThreadId).toHaveBeenCalledWith(
-      'thread-123',
+      'thread-123'
     );
     expect(mockReplyRepository.getRepliesByThreadId).toHaveBeenCalledTimes(1);
     expect(mockReplyRepository.getRepliesByThreadId).toHaveBeenCalledWith(
-      'thread-123',
+      'thread-123'
     );
   });
 });

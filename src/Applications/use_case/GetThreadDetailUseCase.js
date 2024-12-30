@@ -30,7 +30,6 @@ class GetThreadDetailUseCase {
     );
 
     return new ThreadDetail(threadDetail);
-    a;
   }
 }
 
