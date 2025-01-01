@@ -76,6 +76,7 @@ describe('GetThreadDetailUseCase', () => {
         // Simulating additional data returned by getThreadById if needed
       })
     );
+    a;
 
     mockCommentRepository.getCommentsByThreadId = jest.fn(() =>
       Promise.resolve(
